@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  labels:
+    app: {{ .Values.appName }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      containers:
+      - name: {{ .Values.appName }}
+        image: "{{ .Values.appImage }}:{{ .Values.appVersion }}"
+        ports:
+        - containerPort: {{ .Values.appPort }}
+        env:
+        {{- range .Values.containerSecretEnv }}
+        - name: {{ .key }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .secretName }}
+              key: {{ .key }}
+        {{- end }}
+        {{- range .Values.containerConfigMapEnv }}
+        - name: {{ .key }}
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .configMapName }}
+              key: {{ .key }}
+        {{- end }}
