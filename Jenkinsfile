@@ -15,7 +15,8 @@ pipeline {
                 script {
                     sh 'gradle patchVersionUpdate'
                     def version = readProperties(file: 'version.properties')
-                    sh "echo ${version}"
+                    def IMAGE_NAME = "java-app-${version.major}.${version.minor}.${version.patch}"
+                    env.IMAGE_NAME = IMAGE_NAME
                 }
             }
         }
