@@ -10,11 +10,10 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Increment Version') {
             steps {
                 script {
                     sh 'gradle patchVersionUpdate'
-                    sh 'gradle clean build'
                     def version = readProperties(file: 'version.properties')
                     sh "echo ${version}"
                 }
