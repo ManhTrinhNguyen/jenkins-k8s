@@ -3,7 +3,7 @@
 pipeline {
     agent any
     tools {
-        gradle 'gradle-9.0'
+        gradle 'gradle-8.7'
     }
     environment {
         ECR_REPO = '660753258283.dkr.ecr.us-west-1.amazonaws.com'
