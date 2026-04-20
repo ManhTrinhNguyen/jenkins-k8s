@@ -41,5 +41,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to EKS') {
+            steps {
+                script {
+                    sh "envsubst < values.yaml | tee values.yaml"
+                    sh "helm upgrade --install java-app java-app-chart -f values.yaml"
+                }
+            }
+        }
     }
 }

@@ -18,7 +18,7 @@ spec:
       - name: {{ .Values.imagePullSecret }}
       containers:
       - name: {{ .Values.appName }}
-        image: "{{ .Values.appImage }}:{{ .Values.appVersion }}"
+        image: "{{ .Values.appImage }}/{{ .Values.appVersion }}"
         ports:
         - containerPort: {{ .Values.appPort }}
         env:

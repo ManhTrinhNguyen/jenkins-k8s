@@ -1,0 +1,23 @@
+appName: java-app
+replicaCount: 1
+imagePullSecret: docker-secret
+appImage: $ECR_REPO
+appVersion: $IMAGE_NAME
+appPort: 8080
+appHost: a712481b1befc46e1821acb49b792080-154437049.us-west-1.elb.amazonaws.com
+containerSecretEnv:
+- key: DB_PWD
+  secretName: java-app-secret
+- key: DB_USER
+  secretName: java-app-secret
+- key: DB_NAME
+  secretName: java-app-secret
+containerConfigMapEnv:
+- key: DB_SERVER
+  configMapName: java-app-config
+serviceType: ClusterIP
+mysqlSecretData:
+  DB_PWD: password
+  DB_USER: tim
+  DB_NAME: mydatabase
+dbServer: mysql-primary-headless.default.svc.cluster.local
