@@ -23,7 +23,11 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'gradle clean build'
+                script {
+                    sh 'gradle clean build'
+                    sh "echo ${env.IMAGE_NAME}"
+                }
+                
             }
         }
 
