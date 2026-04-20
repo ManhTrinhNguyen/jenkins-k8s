@@ -24,22 +24,22 @@ pipeline {
             steps {
                 script {
                     sh 'gradle clean build'
-                    echo "${env.IMAGE_NAME}"
+                    
                 }
                 
             }
         }
 
-        // stage('Docker Build and Push') {
-        //     steps {
-        //         withCredentials([usernamePassword(credentialsId: 'docker_credential', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
-        //             sh '''
-        //                 echo $PWD | docker login --username AWS --password-stdin $ECR_REPO
-        //                 docker build -t $ECR_REPO/$IMAGE_NAME .
-        //                 docker push $ECR_REPO/$IMAGE_NAME
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('Docker Build and Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'ecr_credential', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
+                    sh '''
+                        echo $PWD | docker login --username AWS --password-stdin $ECR_REPO
+                        docker build -t $ECR_REPO/$IMAGE_NAME .
+                        docker push $ECR_REPO/$IMAGE_NAME
+                    '''
+                }
+            }
+        }
     }
 }
