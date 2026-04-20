@@ -21,6 +21,12 @@ pipeline {
             }
         }
 
+        stage('Build') {
+            steps {
+                sh 'gradle clean build'
+            }
+        }
+
         // stage('Docker Build and Push') {
         //     steps {
         //         withCredentials([usernamePassword(credentialsId: 'docker_credential', usernameVariable: 'USER', passwordVariable: 'PWD')]) {
