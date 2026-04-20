@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     sh 'gradle patchVersionUpdate'
-                    sh './gradlew clean build'
+                    sh 'gradle clean build'
                     def version = readProperties(file: 'version.properties')
                     sh "echo ${version}"
                 }
