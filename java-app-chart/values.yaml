@@ -4,6 +4,7 @@ imagePullSecret: docker-secret
 appImage: nguyenmanhtrinh/demo-app
 appVersion: java-app-v1
 appPort: 8080
+svcPort: 80
 appHost: a712481b1befc46e1821acb49b792080-154437049.us-west-1.elb.amazonaws.com
 containerSecretEnv:
 - key: DB_PWD
