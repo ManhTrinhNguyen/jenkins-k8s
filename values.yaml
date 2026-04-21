@@ -4,7 +4,7 @@ imagePullSecret: docker-secret
 appImage: $ECR_REPO
 appVersion: $IMAGE_NAME
 appPort: 8080
-appHost: a712481b1befc46e1821acb49b792080-154437049.us-west-1.elb.amazonaws.com
+appHost: a10da574793b04b0d8b2a23d2f72a7a3-1809383797.us-west-1.elb.amazonaws.com
 containerSecretEnv:
 - key: DB_PWD
   secretName: java-app-secret
